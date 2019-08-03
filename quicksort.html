@@ -1,0 +1,53 @@
+<html>
+<body>
+<script>
+let input = [23, 23, 23, 0, 0, 0, 1, 1, 1,  5, 4, 8, 4, 7, 2, 6, 2, 2, 2, 10, 22, 11, 4, 25, 25,
+23, 23, 23, 0, 0, 0, 1, 1, 1,  5, 4, 8, 4, 7, 2, 6, 2, 2, 2, 10, 22, 11, 4, 25, 25,
+56,4, 5, 500, 5504, 40, 22, 223, 23, 6, 1, -2, 4.6, 44, 0.556345, 22, -223, -44, -56, -0.9];
+
+function quicksort(arrayToSort, first, last)  {
+  if (first < last) {
+    let pivotIndex = partition(arrayToSort, first, last);
+    quicksort(arrayToSort, first, pivotIndex);
+    quicksort(arrayToSort, pivotIndex + 1, last);
+  }
+}
+
+
+function partition(arrayToSort, first, last) {
+  let pivot = arrayToSort[Math.floor(Math.random() * (last - first) + first)];
+  let start = first;
+  let stop = last;
+
+  for (let i = start; i <= stop; i++) {
+    while (arrayToSort[first] > pivot) {
+      first++;
+    }
+
+    while (arrayToSort[last] < pivot) {
+      last--;
+    }
+
+    if (first >= last) return last;
+
+    let buff = arrayToSort[first];
+    arrayToSort[first] = arrayToSort[last];
+    arrayToSort[last] = buff;
+
+    first++;
+    last--;
+  }
+}
+
+document.write("Input:<br/>");
+document.write(input.join(", "));
+document.write("<br/>");
+document.write("--------------------------------------------------<br/>");
+quicksort(input, 0, input.length - 1);
+document.write("<br/><br/>Result:<br/>");
+document.write(input.join(", "));
+</script>
+<!--23,1,1,1,5,4,8,4,7,2,6,2,2,2,10,22,11,4,25,25-->
+
+</body>
+</html>

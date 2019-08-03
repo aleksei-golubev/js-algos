@@ -1,0 +1,31 @@
+<html>
+<body>
+
+  <script>
+
+let input1 = "i.like.this.program.very.much";
+let input2 = ".ab.c.d.e";
+
+function reverseString(input) {
+  let result = "";
+  let substringLen = 0;
+  for (let i = input.length - 1; i >= 0; i--) {
+    if (input[i] == ".") {
+      result += input.substr(i + 1, substringLen) + ".";
+      substringLen = 0;
+    } else {
+      substringLen++;
+      if (i == 0) {
+        result += input.substr(i, substringLen);
+      }
+    }
+  }
+  return result;
+}
+
+console.log(reverseString(input2));
+  </script>
+
+https://practice.geeksforgeeks.org/problems/reverse-words-in-a-given-string/0
+</body>
+</html>

@@ -1,0 +1,114 @@
+<html>
+<body>
+
+<script>
+
+function fillSeries(squareSidelength) {
+  let n = 1;
+  let step = 1;
+  let numberOfLoops = 1;
+  let coordinates = {x: -1, y: 0};
+
+  let horizontal = true;
+  let series = [];
+
+  for (let i = 0; i < squareSidelength; i++) {
+    if (i > 0) numberOfLoops = 2;
+    for (let j = 1; j <= numberOfLoops; j++) {
+      for (let k = 1; k <= squareSidelength - i; k++) {
+        coordinates = changeCoordinates(coordinates, horizontal, step);
+        if (typeof series[coordinates.y] == 'undefined') {
+          series[coordinates.y] = [];
+        }
+        console.log(coordinates.x, coordinates.y, n);
+        series[coordinates.y][coordinates.x] = n;
+        n++;
+      }
+
+      horizontal = !horizontal;
+      step = (i % 2 == 1) ? -1 : 1;
+    }
+  }
+
+  function changeCoordinates(coordinates, horizontal, step) {
+    if (horizontal) {
+      coordinates.x = coordinates.x + step
+    } else {
+      coordinates.y = coordinates.y + step
+    }
+
+    return coordinates;
+  }
+
+  return series;
+}
+
+// ---------------------------------------------
+
+function printSequences(depth) {
+  let element = "1";
+
+  for (let i = 1; i <= depth; i++) {
+    console.log(i, element.length, element);
+    element = lookAndSay(element);
+  }
+}
+
+function lookAndSay(sequence) {
+  sequence = "" + sequence;
+
+  if (sequence.length == 1) {
+    return "11";
+  } else {
+    let result = "";
+    let cur = sequence[0];
+    let count = 1;
+
+    for (let i = 1; i <= sequence.length; i++) {
+      if (sequence[i] != cur) {
+        result += "" + count + cur;
+        count = 1;
+        cur = sequence[i];
+      } else {
+        count++;
+      }
+    }
+    return result;
+  }
+}
+
+printSequences(10);
+
+// ---------------------------------------------
+
+let str1 = "cdGfgh12+";
+let str2 = "cdffgh12";
+
+let equalLength = 0;
+
+if (str2.length > str1.length) {
+  let buff = str2;
+  str2 = str1;
+  str1 = buff;
+}
+
+for (let i=0; i < str1.length; i++) {
+  if (str1[i] != str2[i]) {
+    equalLength = i;
+    break;
+  }
+}
+
+for (let i=1; i <= str1.length - equalLength; i++) {
+  console.log(equalLength, i, str1[str1.length - i], str2[str2.length - i]);
+  if (str1[str1.length - i] != str2[str2.length - i]) {
+    equalLength += (i -1) ;
+    break;
+  }
+}
+
+console.log(Math.abs(equalLength - str1.length) == 1);
+</script>
+
+</body>
+</html>

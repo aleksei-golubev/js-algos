@@ -1,0 +1,30 @@
+<html>
+<body>
+
+  <script>
+
+let input = [1, 0, 32, 11, 1, 1, 0 , 0, 5, 8];
+let sum = 59;
+
+function getSubArray(A, S) {
+  for (let i = 0; i < A.length; i++) {
+    let elementsSum = 0;
+    for (let j = i; j < A.length; j++) {
+      elementsSum = elementsSum + A[j];
+      if (elementsSum == S) {
+        return [i, j];
+      }
+      if (elementsSum > S) {
+        break;
+      }
+    }
+  }
+
+  return -1;
+}
+    console.log(getSubArray(input, sum));
+  </script>
+
+https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+</body>
+</html>

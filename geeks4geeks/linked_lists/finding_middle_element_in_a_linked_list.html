@@ -1,0 +1,68 @@
+<html>
+<body>
+
+<script>
+
+//node structure
+function Node(element, next) {
+  this.element = element;
+  this.next = next;
+}
+
+//prepare data:
+let head1 = null;
+
+let next = null;
+let newNode = null;
+
+for (let i = 15; i >= 1; i--) {
+     newNode = new Node(i, null);
+     if (next) {
+       newNode.next = new Node(next.element, next.next);
+     }
+     next = new Node(newNode.element, newNode.next);
+}
+
+head1 = newNode;
+delete newNode;
+
+console.log(head1);
+
+function getMiddle(headElement) {
+  let currentElement = headElement;
+  let numberOfElements = 0;
+
+  //count elements
+  while(currentElement) {
+    numberOfElements++;
+    currentElement = currentElement.next;
+  }
+
+  if (numberOfElements > 0) {
+    let middleElementNumber = numberOfElements % 2
+                            ? (numberOfElements - 1) / 2 + 1
+                            : numberOfElements / 2 + 1;
+    let currentElement = headElement;
+
+    for (let i = 1; i < middleElementNumber; i++) {
+      currentElement = currentElement.next;
+    }
+
+    return currentElement.element;
+  }
+
+  // As variation we can create an array of
+  // links to each element of linked list
+  // and get it length and middle element for O(1),
+  // and not as implemented for 0(n).
+
+  return "Empty list!";
+}
+
+console.log(getMiddle(head1));
+
+
+</script>
+https://practice.geeksforgeeks.org/problems/finding-middle-element-in-a-linked-list/1
+</body>
+</html>
